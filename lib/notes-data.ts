@@ -1,4 +1,6 @@
-const data = [
+import type { Note } from "@/types/Note"
+
+const data:Note[] = [
     {
         "id": 1,
         "title": "Walk Around the City",
@@ -8,6 +10,10 @@ const data = [
     }
 ];
 
-export function getData() {
-    return data
+export function getAllNotes() {
+    return data as Note[]
+}
+
+export function getNote(id:number) {
+    return data[id] as Note
 };
