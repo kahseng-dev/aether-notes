@@ -1,34 +1,29 @@
-import Image from "next/image";
-import Link from "next/link";
-import { getAllNotes } from "@/lib/notes-data";
-import type { Note } from "@/types/Note";
-import HomeDirectory from "@/app/ui/home-directory";
+import Link from 'next/link';
+import HomeDirectory from '@/app/ui/home-directory';
 import { Settings, Search } from 'lucide-react';
+import { getAllNotes } from '@/lib/notes-data';
 
 export default function Home() {
   const iconSize = 24;
-
-  const data:Note[] = getAllNotes();
-
-  let headerTitle = "aether-notes"
+  const headerTitle = 'aether-notes';
+  const data = getAllNotes();
 
   return (
-    <div className="p-8 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col">
-        <div className="p-2 flex items-center justify-between">
+    <div className='p-8 font-[family-name:var(--font-geist-sans)]'>
+      <main className='flex flex-col'>
+        <div className='p-2 flex items-center justify-between'>
           <Link
-            href="/settings"
-            className="p-2 rounded transition duration-300 ease-in-out hover:bg-white/20">
+            href='/settings'
+            className='p-2 rounded transition duration-300 ease-in-out hover:bg-white/20'>
               <Settings size={iconSize}/>
           </Link>
           <p>{headerTitle}</p>
-          <Link
-            href="/search"
-            className="p-2 rounded transition duration-300 ease-in-out hover:bg-white/20">
+          <div
+            className='p-2 rounded transition duration-300 ease-in-out hover:bg-white/20'>
               <Search size={iconSize}/>
-          </Link>
+          </div>
         </div>
-        <div className="flex flex-col">
+        <div className='mt-8'>
           <HomeDirectory notes={data}/>
         </div>
       </main>
