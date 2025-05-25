@@ -28,5 +28,5 @@ export function getAllNotes() {
 };
 
 export function getNote(id: number) {
-    return data.find(note => note.id === id) as Note;
+    return data.find(note => note.id == id) as Note;
 };

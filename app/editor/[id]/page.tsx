@@ -4,13 +4,16 @@ import Link from "next/link";
 import { ChevronLeft, Ellipsis } from 'lucide-react';
 import { getNote } from '@/lib/notes-data';
 
-export default function Editor() {
+export default async function Editor({
+  params,
+}: {
+  params: Promise<{id: number}>
+}) {
+  const { id } = await params;
+  const note = getNote(id);
   const iconSize = 24;
-
-  const note = getNote(1);
-
-  let headerTitle = note.title;
-  let wordCount = note.content.join().length;
+  const headerTitle = note.title;
+  const wordCount = note.content.join().length;
   
   return (
     <div className='p-8 font-[family-name:var(--font-geist-sans)]'>
@@ -32,7 +35,11 @@ export default function Editor() {
         </div>
         <div className='px-4 flex flex-col'>
           <div className='flex flex-col'>
-            <p>{note.content}</p>
+            {
+              note.content.map((line, index) =>
+                <p key={index}>{line}</p>
+              )
+            }
           </div>
         </div>
       </main>
