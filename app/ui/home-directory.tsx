@@ -10,7 +10,9 @@ export default function HomeDirectory({ notes }: { notes: Note[] }) {
   const [foldersOpened, setFoldersOpened] = useState<string[]>([])
   const folders: string[] = Array.from(new Set(notes.map(note => note.folder)));
 
-  let folderContentCount = 1;
+  function getFolderContentCount(folderName: string) {
+    return notes.filter(note => note.folder === folderName).length;
+  }
 
   function setShowFolderNotes(folderName: string) {
     if (!foldersOpened.includes(folderName)) {
@@ -28,7 +30,7 @@ export default function HomeDirectory({ notes }: { notes: Note[] }) {
             className='p-4 flex items-center justify-between cursor-pointer rounded transition duration-300 ease-in-out hover:bg-white/20'>
             <p className='font-bold'>{folder}</p>
             <div className='flex items-center gap-2'>
-              <p className='text-zinc-300'>{folderContentCount}</p>
+              <p className='text-zinc-300'>{getFolderContentCount(folder)}</p>
               { !foldersOpened.includes(folder) ? <ChevronDown className='min-w-max'/> : <ChevronRight className='min-w-max'/> }
             </div>
           </div>
