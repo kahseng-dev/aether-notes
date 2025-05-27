@@ -23,44 +23,46 @@ export default function HomeDirectory({ notes }: { notes: Note[] }) {
   }
 
   return (
-      folders.map(folder =>
-        <div key={folder}>
-          <div
-            onClick={() => setOpenedFolderContents(folder)}
-            className='p-4 flex items-center justify-between cursor-pointer rounded transition duration-300 ease-in-out hover:bg-white/20'>
-            <p className='font-bold'>{folder}</p>
-            <div className='flex items-center gap-2'>
-              <p className='text-zinc-300'>{getFolderContentCount(folder)}</p>
-              { !foldersOpened.includes(folder) ?  <ChevronRight className={styles.icon}/> : <ChevronDown className={styles.icon}/>}
-            </div>
-          </div>
-          { foldersOpened.includes(folder) ? (
-              <div>
-                {
-                  notes
-                    .filter(item => item.folder === folder)
-                    .map(item => 
-                    <div key={item.id}>
-                      <Link
-                        href={`/editor/${item.id}`}
-                        className='p-4 flex items-center justify-between cursor-pointer rounded transition duration-300 ease-in-out hover:bg-white/20'>
-                        <div>
-                          <p><strong>{item.title}</strong></p>
-                          <div className='flex gap-2'>
-                            <p><strong>{item.lastUpdated}</strong></p>
-                            <p className='text-zinc-300 line-clamp-1'>{item.content.join(' ')}</p>
-                          </div>
-                        </div>
-                        <ChevronRight className={styles.icon}/>
-                      </Link>
-                    </div>
-                  )
-                }
+      <div className='flex flex-col gap-2'>
+        { folders.map(folder =>
+          <div key={folder}>
+            <div
+              onClick={() => setOpenedFolderContents(folder)}
+              className='p-4 flex items-center justify-between cursor-pointer rounded transition duration-300 ease-in-out hover:bg-white/20'>
+              <p className='font-bold'>{folder}</p>
+              <div className='flex items-center gap-2'>
+                <p className='text-zinc-300'>{getFolderContentCount(folder)}</p>
+                { !foldersOpened.includes(folder) ?  <ChevronRight className={styles.icon}/> : <ChevronDown className={styles.icon}/>}
               </div>
-            ) : null
-          }
-        </div>
-      )
+            </div>
+            { foldersOpened.includes(folder) ? (
+                <div className='pt-2 pl-4 flex flex-col gap-2'>
+                  {
+                    notes
+                      .filter(item => item.folder === folder)
+                      .map(item => 
+                      <div key={item.id}>
+                        <Link
+                          href={`/editor/${item.id}`}
+                          className='p-4 flex items-center justify-between cursor-pointer rounded transition duration-300 ease-in-out hover:bg-white/20'>
+                          <div>
+                            <p><strong>{item.title}</strong></p>
+                            <div className='flex gap-2'>
+                              <p><strong>{item.lastUpdated}</strong></p>
+                              <p className='text-zinc-300 line-clamp-1'>{item.content.join(' ')}</p>
+                            </div>
+                          </div>
+                          <ChevronRight className={styles.icon}/>
+                        </Link>
+                      </div>
+                    )
+                  }
+                </div>
+              ) : null
+            }
+          </div>
+        )}
+      </div>
   );
 }
 
