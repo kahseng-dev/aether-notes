@@ -48,7 +48,7 @@ export default function HomeDirectory({ notes }: { notes: Note[] }) {
                           <p><strong>{item.title}</strong></p>
                           <div className='flex gap-2'>
                             <p><strong>{item.lastUpdated}</strong></p>
-                            <p className='text-zinc-300 line-clamp-1'>{item.content}</p>
+                            <p className='text-zinc-300 line-clamp-1'>{item.content.join(' ')}</p>
                           </div>
                         </div>
                         <ChevronRight className='min-w-max'/>
