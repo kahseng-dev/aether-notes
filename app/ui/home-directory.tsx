@@ -7,34 +7,34 @@ import { useState } from 'react';
 
 export default function HomeDirectory({ notes }: { notes: Note[] }) {
 
-  const [foldersOpened, setFoldersOpened] = useState<string[]>([])
+  let [foldersOpened, setFoldersOpened] = useState<string[]>([])
   const folders: string[] = Array.from(new Set(notes.map(note => note.folder)));
 
   function getFolderContentCount(folderName: string) {
     return notes.filter(note => note.folder === folderName).length;
   }
 
-  function setShowFolderNotes(folderName: string) {
+  function setOpenedFolderContents(folderName: string) {
     if (!foldersOpened.includes(folderName)) {
       return setFoldersOpened(folders => [...folders, folderName]);
     }
 
-    return setFoldersOpened(folders => folders.filter(folder => folder !== folderName))
+    return setFoldersOpened(folders => folders.filter(folder => folder !== folderName));
   }
 
   return (
       folders.map(folder =>
         <div key={folder}>
           <div
-            onClick={() => setShowFolderNotes(folder)}
+            onClick={() => setOpenedFolderContents(folder)}
             className='p-4 flex items-center justify-between cursor-pointer rounded transition duration-300 ease-in-out hover:bg-white/20'>
             <p className='font-bold'>{folder}</p>
             <div className='flex items-center gap-2'>
               <p className='text-zinc-300'>{getFolderContentCount(folder)}</p>
-              { !foldersOpened.includes(folder) ? <ChevronDown className='min-w-max'/> : <ChevronRight className='min-w-max'/> }
+              { !foldersOpened.includes(folder) ?  <ChevronRight className='min-w-max'/> : <ChevronDown className='min-w-max'/>}
             </div>
           </div>
-          { !foldersOpened.includes(folder) ? (
+          { foldersOpened.includes(folder) ? (
               <div>
                 {
                   notes
