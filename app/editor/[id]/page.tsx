@@ -18,7 +18,7 @@ export default async function Editor({
   return (
     <div className='p-8 font-[family-name:var(--font-geist-sans)]'>
       <main className='flex flex-col'>
-        <div className='p-4 flex justify-between'>
+        <div className='p-2 flex justify-between'>
           <Link
             href='/'
             className='p-2 gap-4 flex items-center cursor-pointer rounded transition duration-300 ease-in-out hover:bg-white/20'>
