@@ -32,7 +32,7 @@ export default function HomeDirectory({ notes }: { notes: Note[] }) {
               <p className='font-bold'>{folder}</p>
               <div className='flex items-center gap-2'>
                 <p className='text-zinc-300'>{getFolderContentCount(folder)}</p>
-                { !foldersOpened.includes(folder) ?  <ChevronRight className={styles.icon}/> : <ChevronDown className={styles.icon}/>}
+                { !foldersOpened.includes(folder) ? <ChevronRight className={styles.icon}/> : <ChevronDown className={styles.icon}/>}
               </div>
             </div>
             { foldersOpened.includes(folder) ? (

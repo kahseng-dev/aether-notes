@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import HomeDirectory from '@/app/ui/home-directory';
+import HomeCreateNote from '@/app/ui/home-create-note';
 import { Settings, Search } from 'lucide-react';
 import { getAllNotes } from '@/lib/notes-data';
 
@@ -8,9 +9,9 @@ export default function Home() {
   const data = getAllNotes();
 
   return (
-    <div className='p-8 font-[family-name:var(--font-geist-sans)]'>
+    <div className='p-10 font-[family-name:var(--font-geist-sans)]'>
       <main className='flex flex-col'>
-        <div className='p-2 flex items-center justify-between'>
+        <div className='flex items-center justify-between'>
           <Link
             href='/settings'
             className='p-2 rounded transition duration-300 ease-in-out hover:bg-white/20'>
@@ -18,12 +19,15 @@ export default function Home() {
           </Link>
           <p>{headerTitle}</p>
           <div
-            className='p-2 rounded transition duration-300 ease-in-out hover:bg-white/20'>
+            className='p-2 rounded cursor-pointer transition duration-300 ease-in-out hover:bg-white/20'>
               <Search className={styles.icon}/>
           </div>
         </div>
         <div className='mt-8'>
           <HomeDirectory notes={data}/>
+        </div>
+        <div className='mt-8'>
+          <HomeCreateNote notes={data}/>
         </div>
       </main>
     </div>
