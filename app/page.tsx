@@ -4,7 +4,6 @@ import { Settings, Search } from 'lucide-react';
 import { getAllNotes } from '@/lib/notes-data';
 
 export default function Home() {
-  const iconSize = 24;
   const headerTitle = 'aether-notes';
   const data = getAllNotes();
 
@@ -15,12 +14,12 @@ export default function Home() {
           <Link
             href='/settings'
             className='p-2 rounded transition duration-300 ease-in-out hover:bg-white/20'>
-              <Settings size={iconSize}/>
+              <Settings className={styles.icon}/>
           </Link>
           <p>{headerTitle}</p>
           <div
             className='p-2 rounded transition duration-300 ease-in-out hover:bg-white/20'>
-              <Search size={iconSize}/>
+              <Search className={styles.icon}/>
           </div>
         </div>
         <div className='mt-8'>
@@ -30,3 +29,7 @@ export default function Home() {
     </div>
   );
 }
+
+const styles = {
+  icon: 'size-5 min-w-max',
+};

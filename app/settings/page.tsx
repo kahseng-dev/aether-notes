@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ChevronLeft, Circle } from 'lucide-react';
 
 export default function Settings() {
-  const iconSize = 24;
   const headerTitle = 'Settings';
   const fontTypes = ['Default', 'Monospaced', 'Serif', 'Rounded'];
   const previewTitle = 'Betty White'
@@ -15,7 +14,7 @@ export default function Settings() {
           <Link
             href='/'
             className='p-2 gap-4 flex items-center cursor-pointer rounded transition duration-300 ease-in-out hover:bg-white/20'>
-            <ChevronLeft size={iconSize}/>
+            <ChevronLeft className={styles.icon}/>
           </Link>
           <p>{headerTitle}</p>
           <p></p>
@@ -25,16 +24,14 @@ export default function Settings() {
             <p><strong>{previewTitle}</strong></p>
             <p>{previewText}</p>
           </div>
-          <div className='gap-2 flex flex-col'>
+          <div className='flex flex-col'>
             {
                 fontTypes.map(fontOption =>
                     <div
                       key={fontOption}
-                      className='py-2 flex justify-between border-b border-zinc-800'>
+                      className='p-4 flex items-center justify-between border-b border-zinc-800 cursor-pointer transition duration-300 ease-in-out hover:bg-white/20'>
                         <p>{fontOption}</p>
-                        <Circle
-                          className="cursor-pointer transition duration-300 ease-in-out hover:bg-white/20 rounded-full"
-                          size={iconSize}/>
+                        <Circle className={styles.icon}/>
                     </div>
                 )
             }
@@ -43,4 +40,8 @@ export default function Settings() {
       </main>
     </div>
   );
-}
+};
+
+const styles = {
+  icon: 'size-5 min-w-max',
+};

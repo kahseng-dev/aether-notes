@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 export default function HomeDirectory({ notes }: { notes: Note[] }) {
 
-  let [foldersOpened, setFoldersOpened] = useState<string[]>([])
+  const [foldersOpened, setFoldersOpened] = useState<string[]>([]);
   const folders: string[] = Array.from(new Set(notes.map(note => note.folder)));
 
   function getFolderContentCount(folderName: string) {
@@ -31,7 +31,7 @@ export default function HomeDirectory({ notes }: { notes: Note[] }) {
             <p className='font-bold'>{folder}</p>
             <div className='flex items-center gap-2'>
               <p className='text-zinc-300'>{getFolderContentCount(folder)}</p>
-              { !foldersOpened.includes(folder) ?  <ChevronRight className='min-w-max'/> : <ChevronDown className='min-w-max'/>}
+              { !foldersOpened.includes(folder) ?  <ChevronRight className={styles.icon}/> : <ChevronDown className={styles.icon}/>}
             </div>
           </div>
           { foldersOpened.includes(folder) ? (
@@ -51,7 +51,7 @@ export default function HomeDirectory({ notes }: { notes: Note[] }) {
                             <p className='text-zinc-300 line-clamp-1'>{item.content.join(' ')}</p>
                           </div>
                         </div>
-                        <ChevronRight className='min-w-max'/>
+                        <ChevronRight className={styles.icon}/>
                       </Link>
                     </div>
                   )
@@ -63,3 +63,7 @@ export default function HomeDirectory({ notes }: { notes: Note[] }) {
       )
   );
 }
+
+const styles = {
+    icon: 'size-5 min-w-max',
+};
