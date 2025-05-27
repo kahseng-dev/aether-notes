@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from "next/link";
-import { ChevronLeft, Ellipsis } from 'lucide-react';
+import EditorOptions from '@/app/ui/editor-options';
+import { ChevronLeft } from 'lucide-react';
 import { getNote } from '@/lib/notes-data';
 
 export default async function Editor({
@@ -11,7 +11,6 @@ export default async function Editor({
 }) {
   const { id } = await params;
   const note = getNote(id);
-  const iconSize = 24;
   const headerTitle = note.title;
   const wordCount = note.content.join().length;
   
@@ -22,12 +21,9 @@ export default async function Editor({
           <Link
             href='/'
             className='p-2 gap-4 flex items-center cursor-pointer rounded transition duration-300 ease-in-out hover:bg-white/20'>
-            <ChevronLeft size={iconSize}/>
+            <ChevronLeft className={styles.icon}/>
           </Link>
-          <button
-            className='p-2 gap-4 flex items-center cursor-pointer rounded transition duration-300 ease-in-out hover:bg-white/20'>
-            <Ellipsis size={iconSize}/>
-          </button>
+          <EditorOptions note={note}/>
         </div>
         <div className='p-4 flex items-center justify-between'>
           <p className='text-xl'>{headerTitle}</p>
@@ -46,3 +42,7 @@ export default async function Editor({
     </div>
   );
 }
+
+const styles = {
+  icon: 'size-5 min-w-max',
+};
