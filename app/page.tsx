@@ -1,12 +1,16 @@
+'use client'
+
 import Link from 'next/link';
+import SearchButton from '@/app/ui/search-button';
 import HomeDirectory from '@/app/ui/home-directory';
 import HomeCreateNote from '@/app/ui/home-create-note';
 import { Settings, Search } from 'lucide-react';
 import { getAllNotes } from '@/lib/notes-data';
+import type { Note } from '@/types/Note';
 
 export default function Home() {
   const headerTitle = 'aether-notes';
-  const data = getAllNotes();
+  const data:Note[] = getAllNotes() || [];
 
   return (
     <div className='p-10 font-[family-name:var(--font-geist-sans)]'>
@@ -18,15 +22,17 @@ export default function Home() {
               <Settings className={styles.icon}/>
           </Link>
           <p>{headerTitle}</p>
-          <div
+          <button 
+            onClick={() => console.log('Search clicked')}
             className='p-2 rounded cursor-pointer transition duration-300 ease-in-out hover:bg-white/20'>
               <Search className={styles.icon}/>
-          </div>
+          </button>
         </div>
         <div className='mt-8'>
           <HomeDirectory notes={data}/>
         </div>
-        <div className='mt-8'>
+        <div className='mt-8 flex justify-between'>
+          <div></div>
           <HomeCreateNote notes={data}/>
         </div>
       </main>

@@ -22,6 +22,14 @@ export default function HomeDirectory({ notes }: { notes: Note[] }) {
     return setFoldersOpened(folders => folders.filter(folder => folder !== folderName));
   }
 
+  if (notes.length === 0) {
+    return (
+      <div className='flex flex-col gap-2'>
+        <p className='text-center'>No notes found</p>
+      </div>
+    );
+  }
+
   return (
       <div className='flex flex-col gap-2'>
         { folders.map(folder =>
