@@ -1,20 +1,32 @@
 'use client'
 
 import Link from 'next/link';
+import type { Note } from '@/types/Note';
 import { useState } from 'react';
 import { Search, FileText } from 'lucide-react';
 
-export default function SearchButton() {
+export default function SearchButton({ notes }: { notes: Note[] }) {
     const [isSearchModalVisible, setIsSearchModalVisible] = useState(false);
-    
+    const [searchResult, setSearchResult] = useState<Note[]>([]);
+
     const placeholderText = 'Search notes...';
 
     function handleShowModal() {
         return setIsSearchModalVisible(isSearchModalVisible ? false : true);
     }
-
+    
     function handleSearchInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-        return
+        let searchInput = event.target.value.toLowerCase();
+        let result:Note[] = [];
+
+        if (searchInput.length > 0) {
+            result = notes.filter(note => 
+                note.title.toLowerCase().includes(searchInput) || 
+                note.content.join(' ').toLowerCase().includes(searchInput)
+            );
+        }
+
+        return setSearchResult(result);
     }
 
     return (
@@ -25,7 +37,7 @@ export default function SearchButton() {
                         onClick={handleShowModal}
                         className='absolute top-0 left-0 size-full'/>
                     <div className='relative flex flex-col items-center w-full max-w-md text-zinc-300 border border-white/20 bg-black rounded'>
-                        <div className='p-2 w-full flex items-center border-b border-white/20'>
+                        <div className='p-2 w-full flex items-center'>
                             <Search className={styles.icon}/>
                             <input
                                 onChange={handleSearchInputChange}
@@ -33,12 +45,18 @@ export default function SearchButton() {
                                 placeholder={placeholderText}
                                 className='ml-2 outline-none'/>
                         </div>
-                        <div className='w-full *:m-2 *:gap-2 *:p-2 *:flex *:items-center *:cursor-pointer *:hover:bg-white/20 *:rounded'>
-                            <div>
-                                <FileText className={styles.icon} />
-                                <p>Note/Note</p>
-                            </div>
-                        </div>
+                        { searchResult.length > 0 ? 
+                            <div className='border-t border-white/20 w-full max-h-64 overflow-y-auto *:m-2 *:gap-2 *:p-2 *:flex *:items-center *:cursor-pointer *:hover:bg-white/20 *:rounded'>
+                                { searchResult.map(note =>
+                                    <Link
+                                        key={note.id}
+                                        href={`/editor/${note.id}`}>
+                                        <FileText className={styles.icon} />
+                                        <p>{note.title}</p>
+                                    </Link>
+                                )}
+                                </div>
+                        : null }
                     </div>
                 </div>
             : null }

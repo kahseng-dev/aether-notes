@@ -20,7 +20,7 @@ export default function Home() {
               <Settings className={styles.icon}/>
           </Link>
           <p>{headerTitle}</p>
-          <SearchButton/>
+          <SearchButton notes={data}/>
         </div>
         <div className='mt-8'>
           <HomeDirectory notes={data}/>
