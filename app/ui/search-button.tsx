@@ -52,7 +52,8 @@ export default function SearchButton({ notes }: { notes: Note[] }) {
                                         key={note.id}
                                         href={`/editor/${note.id}`}>
                                         <FileText className={styles.icon} />
-                                        <p>{note.title}</p>
+                                        <p className='truncate'>{note.title}</p>
+                                        <p className='text-sm opacity-50 text-nowrap'>— {note.folder}</p>
                                     </Link>
                                 )}
                                 </div>
