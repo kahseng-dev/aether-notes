@@ -1,10 +1,8 @@
-'use client'
-
 import Link from 'next/link';
 import SearchButton from '@/app/ui/search-button';
 import HomeDirectory from '@/app/ui/home-directory';
 import HomeCreateNote from '@/app/ui/home-create-note';
-import { Settings, Search } from 'lucide-react';
+import { Settings } from 'lucide-react';
 import { getAllNotes } from '@/lib/notes-data';
 import type { Note } from '@/types/Note';
 
@@ -22,11 +20,7 @@ export default function Home() {
               <Settings className={styles.icon}/>
           </Link>
           <p>{headerTitle}</p>
-          <button 
-            onClick={() => console.log('Search clicked')}
-            className='p-2 rounded cursor-pointer transition duration-300 ease-in-out hover:bg-white/20'>
-              <Search className={styles.icon}/>
-          </button>
+          <SearchButton/>
         </div>
         <div className='mt-8'>
           <HomeDirectory notes={data}/>
