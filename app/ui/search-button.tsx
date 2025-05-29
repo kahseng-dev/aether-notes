@@ -43,7 +43,7 @@ export default function SearchButton({ notes }: { notes: Note[] }) {
                                 onChange={handleSearchInputChange}
                                 type='text'
                                 placeholder={placeholderText}
-                                className='ml-2 outline-none'/>
+                                className='ml-2 w-full outline-none'/>
                         </div>
                         { searchResult.length > 0 ? 
                             <div className='border-t border-white/20 w-full max-h-64 overflow-y-auto *:m-2 *:gap-2 *:p-2 *:flex *:items-center *:cursor-pointer *:hover:bg-white/20 *:rounded'>
