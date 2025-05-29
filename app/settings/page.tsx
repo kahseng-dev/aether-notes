@@ -68,8 +68,9 @@ export default function Settings() {
         </div>
         <div className='mt-8 flex flex-col gap-8 mb-48'>
           <div>
-            <p><strong>{previewTitle}</strong></p>
-            <p>{previewText}</p>
+            <p className='mb-4'>Preview</p>
+            <p className="pl-4"><strong>{previewTitle}</strong></p>
+            <p className="pl-4">{previewText}</p>
           </div>
           <div className='flex flex-col'>
             <p className='mb-2'>Font Family</p>
