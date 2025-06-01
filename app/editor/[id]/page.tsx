@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from "next/link";
 import EditorOptions from '@/app/ui/editor-options';
+import EditorNotes from '@/app/ui/editor-core';
 import { ChevronLeft } from 'lucide-react';
 import { getNote } from '@/lib/notes-data';
 
@@ -29,14 +30,8 @@ export default async function Editor({
           <p className='text-xl'>{headerTitle}</p>
           <p className='text-zinc-500'>{wordCount}</p>
         </div>
-        <div className='px-4 flex flex-col'>
-          <div className='flex flex-col'>
-            {
-              note.content.map((line, index) =>
-                <p key={index}>{line}</p>
-              )
-            }
-          </div>
+        <div className='border px-4 flex flex-col cursor-pointer'>
+          <EditorNotes note={note} />
         </div>
       </main>
     </div>
