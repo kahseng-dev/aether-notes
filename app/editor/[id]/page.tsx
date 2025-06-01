@@ -1,11 +1,7 @@
 import Head from 'next/head';
 import Link from "next/link";
 import EditorOptions from '@/app/ui/editor-options';
-<<<<<<< HEAD
 import EditorMarkdown from '@/app/ui/editor-markdown';
-=======
-import EditorNotes from '@/app/ui/editor-core';
->>>>>>> a2f2bda2125f4f0d309e51e5ac960139772a4986
 import { ChevronLeft } from 'lucide-react';
 import { getNote } from '@/lib/notes-data';
 
