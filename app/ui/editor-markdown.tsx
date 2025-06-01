@@ -1,61 +1,38 @@
+'use client'
+
+import { useState, useEffect } from 'react';
 import type { Note } from '@/types/Note';
 import { Bold, Italic, Heading, Quote, List, ListOrdered, Link, Image, Eye, Columns2, Expand } from 'lucide-react';
+import { MdEditor } from 'md-editor-rt';
+import 'md-editor-rt/lib/style.css';
 
 export default function EditorMarkdown({ note }: { note: Note }) {
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [content, setContent] = useState(note.content.join(' '));
+
+    useEffect(() => {
+        // DOM has to be loaded before initializing the editor
+        // This is a workaround for
+        // Error: Hydration failed because the initial UI does not match what was rendered on the server
+        setIsLoaded(true);
+    }, []);
+
     return (
-        <div>
-            <div className='p-10'>
-                <span
-                    className='border outline-none'
-                    contentEditable={true}
-                    suppressContentEditableWarning={true}>
-                    {note.content}
-                </span>
-            </div>
-            <div className='fixed bottom-0 border-white/20 border-t w-full flex bg-black *:my-1.5 *:py-0.2 *:px-4 *:gap-4 *:flex *:border-r *:border-white/20'>
+        <>
+            { isLoaded && (
                 <div>
-                    <button className={styles.button}>
-                        <Bold className={styles.icon} />
-                    </button>
-                    <button className={styles.button}>
-                        <Italic className={styles.icon} />
-                    </button>
-                    <button className={styles.button}>
-                        <Heading className={styles.icon} />
-                    </button>
+                    <div className='p-10'>
+                        <MdEditor
+                            theme='dark'
+                            language='en-US'
+                            value={content}
+                            preview={false}
+                            onChange={() => setContent(content)}
+                        />
+                    </div>
                 </div>
-                <div>
-                    <button className={styles.button}>
-                        <Quote className={styles.icon} />
-                    </button>
-                    <button className={styles.button}>
-                        <List className={styles.icon} />
-                    </button>
-                    <button className={styles.button}>
-                        <ListOrdered className={styles.icon} />
-                    </button>
-                </div>
-                <div>
-                    <button className={styles.button}>
-                        <Link className={styles.icon} />
-                    </button>
-                    <button className={styles.button}>
-                        <Image className={styles.icon} />
-                    </button>
-                </div>
-                <div>
-                    <button className={styles.button}>
-                        <Eye className={styles.icon} />
-                    </button>
-                    <button className={styles.button}>
-                        <Columns2 className={styles.icon} />
-                    </button>
-                    <button className={styles.button}>
-                        <Expand className={styles.icon} />
-                    </button>
-                </div>
-            </div>
-        </div>
+            )}
+        </>
     );
 }
 
