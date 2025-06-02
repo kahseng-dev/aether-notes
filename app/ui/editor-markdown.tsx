@@ -8,7 +8,7 @@ import type { ToolbarNames } from 'md-editor-rt';
 
 export default function EditorMarkdown({ note }: { note: Note }) {
     const [isLoaded, setIsLoaded] = useState(false);
-    const [content, setContent] = useState(note.content.join(' '));
+    const [content, setContent] = useState(note.content);
     const [toolbars] = useState<ToolbarNames[]>([
         'bold',
         'italic',

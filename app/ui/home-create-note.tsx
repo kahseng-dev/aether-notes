@@ -14,7 +14,7 @@ export default function HomeCreateNote({ notes }: { notes: Note[] }) {
       id: newNoteId,
       title: 'New Note',
       lastUpdated: new Date().toISOString(),
-      content: [],
+      content: '',
       folder: 'Notes',
     };
 

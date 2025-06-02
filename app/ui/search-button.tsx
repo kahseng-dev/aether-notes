@@ -22,7 +22,7 @@ export default function SearchButton({ notes }: { notes: Note[] }) {
         if (searchInput.length > 0) {
             result = notes.filter(note => 
                 note.title.toLowerCase().includes(searchInput) || 
-                note.content.join(' ').toLowerCase().includes(searchInput)
+                note.content.toLowerCase().includes(searchInput)
             );
         }
 
