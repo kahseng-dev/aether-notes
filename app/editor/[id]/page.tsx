@@ -12,11 +12,10 @@ export default async function Editor({
 }) {
   const { id } = await params;
   const note = getNote(id);
-  const wordCount = note.content.join().length;
   
   return (
-    <div className='font-[family-name:var(--font-geist-sans)]'>
-      <main className='pt-10 pl-10 flex flex-col'>
+    <div className='flex flex-col h-screen font-[family-name:var(--font-geist-sans)]'>
+      <main className='pt-10 px-10 flex flex-col'>
         <div className='flex justify-between'>
           <Link
             href='/'
@@ -27,10 +26,11 @@ export default async function Editor({
         </div>
         <div className='pt-4 flex items-center justify-between'>
           <p className='text-xl'>{note.title}</p>
-          <p className='text-zinc-500'>{wordCount}</p>
         </div>
       </main>
-      <EditorMarkdown note={note}/>
+      <div className='pt-4'>
+        <EditorMarkdown note={note}/>
+      </div>
     </div>
   );
 }

@@ -2,13 +2,29 @@
 
 import { useState, useEffect } from 'react';
 import type { Note } from '@/types/Note';
-import { Bold, Italic, Heading, Quote, List, ListOrdered, Link, Image, Eye, Columns2, Expand } from 'lucide-react';
 import { MdEditor } from 'md-editor-rt';
 import 'md-editor-rt/lib/style.css';
+import type { ToolbarNames } from 'md-editor-rt';
 
 export default function EditorMarkdown({ note }: { note: Note }) {
     const [isLoaded, setIsLoaded] = useState(false);
     const [content, setContent] = useState(note.content.join(' '));
+    const [toolbars] = useState<ToolbarNames[]>([
+        'bold',
+        'italic',
+        'title',
+        '-',
+        'quote',
+        'unorderedList',
+        'orderedList',
+        '-',
+        'link',
+        'image',
+        'preview',
+    ]);
+    const style = {
+        height: 'calc(100vh - 8.5rem)',
+    };
 
     useEffect(() => {
         // DOM has to be loaded before initializing the editor
@@ -20,23 +36,16 @@ export default function EditorMarkdown({ note }: { note: Note }) {
     return (
         <>
             { isLoaded && (
-                <div>
-                    <div className='p-10'>
-                        <MdEditor
-                            theme='dark'
-                            language='en-US'
-                            value={content}
-                            preview={false}
-                            onChange={() => setContent(content)}
-                        />
-                    </div>
-                </div>
+                <MdEditor
+                    style={style}
+                    theme='dark'
+                    language='en-US'
+                    value={content}
+                    preview={false}
+                    toolbars={toolbars}
+                    onChange={setContent}
+                />
             )}
         </>
     );
 }
-
-const styles = {
-    icon: 'size-5 min-w-max',
-    button: 'p-0.5 cursor-pointer rounded hover:bg-white/20 transition duration-300 ease-in-out',
-};
