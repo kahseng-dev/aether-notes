@@ -8,7 +8,7 @@ export default function EditorOptions({ note }: { note: Note }) {
     const [isOptionsModalVisible, setIsOptionsModalVisible] = useState(false);
     
     return (
-        <div>
+        <div className='z-10'>
             <button
                 onClick={() => setIsOptionsModalVisible(!isOptionsModalVisible)}
                 className='p-2 gap-4 flex items-center cursor-pointer rounded transition duration-300 ease-in-out hover:bg-white/20'>
