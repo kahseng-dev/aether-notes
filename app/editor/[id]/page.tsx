@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from "next/link";
 import EditorOptions from '@/app/ui/editor-options';
+import EditorTitle from '@/app/ui/editor-title';
 import EditorMarkdown from '@/app/ui/editor-markdown';
 import { ChevronLeft } from 'lucide-react';
 import { getNote } from '@/lib/notes-data';
@@ -25,7 +26,7 @@ export default async function Editor({
           <EditorOptions note={note}/>
         </div>
         <div className='pt-4 flex items-center justify-between'>
-          <p className='text-xl'>{note.title}</p>
+          <EditorTitle note={note}/>
         </div>
       </main>
       <div className='pt-4'>
