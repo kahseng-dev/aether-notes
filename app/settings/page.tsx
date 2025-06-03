@@ -8,33 +8,22 @@ export default function Settings() {
   const headerTitle = 'Settings';
   const previewTitle = 'Betty White'
   const previewText = "It's your outlook on life that counts. If you take yourself lightly and don't take yourself too seriously, pretty soon you can find the humor in our everyday lives. And sometimes it can be a lifesaver."
-  const fontOptions = [
-    {
-      type:'Default',
-      fontClassName: 'font-sans',
-    },
-    {
-      type:'Monospaced',
-      fontClassName: 'font-mono',
-    },
-    {
-      type:'Serif',
-      fontClassName: 'font-serif',
-    },
-    {
-      type:'Rounded',
-      fontClassName: 'font-rounded',
-    },
-  ];
+  const fontOptions = {
+    'Default': 'font-sans',
+    'Monospaced': 'font-mono',
+    'Serif':'font-serif',
+    'Rounded':'font-rounded',
+  };
+  type FontOption = keyof typeof fontOptions;
   const themeOptions = ['Dark', 'Light'];
 
   const [storedTheme, setStoredTheme] = useState('dark');
-  const [storedFontOption, setStoredFontOption] = useState('Default');
+  const [storedFontOption, setStoredFontOption] = useState<FontOption>('Default');
 
   useEffect(() => {
     try {
-      localStorage.getItem('theme') || localStorage.setItem('theme', 'dark');
-      localStorage.getItem('font-option') || localStorage.setItem('font-option', 'Default');
+      setStoredTheme(localStorage.getItem('theme') || 'dark');
+      setStoredFontOption((localStorage.getItem('font-option') as FontOption) || 'Default');
     }
 
     catch (error) {
@@ -50,12 +39,12 @@ export default function Settings() {
 
   function handleFontOptionChange(event:React.ChangeEvent<HTMLInputElement>) {
     const newFont = event.target.value;
-    setStoredFontOption(newFont);
+    setStoredFontOption(newFont as FontOption);
     localStorage.setItem('font-option', newFont);
   }
 
   return (
-    <div className='p-8 font-[family-name:var(--font-geist-sans)]'>
+    <div className={`p-8 ${fontOptions[storedFontOption]}`}>
       <main className='flex flex-col'>
         <div className='p-2 flex items-center justify-between'>
           <Link
@@ -74,18 +63,18 @@ export default function Settings() {
           </div>
           <div className='flex flex-col'>
             <p className='mb-2'>Font Family</p>
-            { fontOptions.map(fontOption =>
+            { Object.entries(fontOptions).map(([fontOption, fontClassName]) =>
               <label
-                key={fontOption.type}
+                key={fontOption}
                 className='p-4 flex items-center justify-between border-b border-zinc-800 cursor-pointer transition duration-300 ease-in-out hover:bg-white/20'>
-                  <p className={`${fontOption.fontClassName}`}>{fontOption.type}</p>
+                  <p className={`${fontClassName}`}>{fontOption}</p>
                   <input
                     onChange={handleFontOptionChange}
-                    checked={storedFontOption === fontOption.type}
+                    checked={storedFontOption === fontOption}
                     className={`${styles.icon} cursor-pointer`}
                     type='radio'
                     name='font-family'
-                    value={fontOption.type}/>
+                    value={fontOption}/>
               </label>
             )}
           </div>
