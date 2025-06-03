@@ -11,19 +11,19 @@ export default function Settings() {
   const fontOptions = [
     {
       type:'Default',
-      fontFamily: 'var(--font-geist-sans)',
+      fontClassName: 'font-sans',
     },
     {
       type:'Monospaced',
-      fontFamily: 'var(--font-geist-sans)',
+      fontClassName: 'font-mono',
     },
     {
       type:'Serif',
-      fontFamily: 'var(--font-geist-sans)',
+      fontClassName: 'font-serif',
     },
     {
       type:'Rounded',
-      fontFamily: 'var(--font-geist-sans)',
+      fontClassName: 'font-rounded',
     },
   ];
   const themeOptions = ['Dark', 'Light'];
@@ -78,11 +78,11 @@ export default function Settings() {
               <label
                 key={fontOption.type}
                 className='p-4 flex items-center justify-between border-b border-zinc-800 cursor-pointer transition duration-300 ease-in-out hover:bg-white/20'>
-                  <p>{fontOption.type}</p>
+                  <p className={`${fontOption.fontClassName}`}>{fontOption.type}</p>
                   <input
                     onChange={handleFontOptionChange}
                     checked={storedFontOption === fontOption.type}
-                    className={`${styles.icon} font-[family-name:${fontOption.fontFamily}] cursor-pointer`}
+                    className={`${styles.icon} cursor-pointer`}
                     type='radio'
                     name='font-family'
                     value={fontOption.type}/>
